@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2150414286462215683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7770612100766506219}
+  - component: {fileID: 2453694622774824318}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7770612100766506219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2150414286462215683}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.6266799, y: 4.172105, z: -4.1169367}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2453694622774824318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2150414286462215683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a078608b3793f48d19af8d3b8f7eea64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0
+  sounds:
+  - Name: BGMusic
+    Clip: {fileID: 8300000, guid: 5023f6bd6588c4a7b9ce054151e11ae7, type: 3}
+    Volume: 0.302
+    Pitch: 1
+    Loop: 1
+    Mute: 0
+    source: {fileID: 0}
+  - Name: BoxOpen
+    Clip: {fileID: 8300000, guid: b90d6652e506f4c12864b004581958b8, type: 3}
+    Volume: 0.755
+    Pitch: 1
+    Loop: 0
+    Mute: 0
+    source: {fileID: 0}
+  - Name: Merge
+    Clip: {fileID: 8300000, guid: f6e9c68c7376649a69ac13991bf58d7f, type: 3}
+    Volume: 0.761
+    Pitch: 1
+    Loop: 0
+    Mute: 0
+    source: {fileID: 0}
+  - Name: Tap
+    Clip: {fileID: 8300000, guid: 50d4823c4ed5d4f4cb2c2d395309505a, type: 3}
+    Volume: 0.78
+    Pitch: 1
+    Loop: 0
+    Mute: 0
+    source: {fileID: 0}
+  - Name: CarGroundSmash
+    Clip: {fileID: 8300000, guid: cd3138af489f18c49821912054ef00a3, type: 3}
+    Volume: 0.2
+    Pitch: 1
+    Loop: 0
+    Mute: 0
+    source: {fileID: 0}
+  - Name: CrowdSound
+    Clip: {fileID: 8300000, guid: a4b79ba4e506c7d4bb997a26fd24e2d3, type: 3}
+    Volume: 0.4
+    Pitch: 1
+    Loop: 0
+    Mute: 0
+    source: {fileID: 0}
+  - Name: Nitro
+    Clip: {fileID: 8300000, guid: a0c55ce545736da42bf22f46343970c5, type: 3}
+    Volume: 0.4
+    Pitch: 1
+    Loop: 0
+    Mute: 0
+    source: {fileID: 0}
+  - Name: CarCrashToPlayer
+    Clip: {fileID: 8300000, guid: cd3138af489f18c49821912054ef00a3, type: 3}
+    Volume: 0.4
+    Pitch: 1
+    Loop: 0
+    Mute: 0
+    source: {fileID: 0}
+  - Name: BoxHit
+    Clip: {fileID: 8300000, guid: 2215882a19f40cc4d829b03c2615a4dd, type: 3}
+    Volume: 0.4
+    Pitch: 1
+    Loop: 0
+    Mute: 0
+    source: {fileID: 0}
+  - Name: ComboNitro
+    Clip: {fileID: 8300000, guid: a992d906fd05c7e4abca57a593340bae, type: 3}
+    Volume: 0.653
+    Pitch: 1
+    Loop: 0
+    Mute: 0
+    source: {fileID: 0}
+  - Name: Combo
+    Clip: {fileID: 8300000, guid: 4369d4f54f7dab9458bcc90aeef0e297, type: 3}
+    Volume: 0.653
+    Pitch: 1
+    Loop: 0
+    Mute: 0
+    source: {fileID: 0}
