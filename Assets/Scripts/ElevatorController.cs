@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 public class ElevatorController : MonoBehaviour
 {
     [SerializeField] private Transform RgtDoor;
-
     [SerializeField] private Transform LftDoor;
+    private int floorNumber =0;
+    [SerializeField]private TMP_Text floorText;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +40,10 @@ public class ElevatorController : MonoBehaviour
     public void CloseDoor()
     {
         RgtDoor.DOLocalMoveX(-0.8f, 0.6f).SetEase(Ease.OutQuad);
-        LftDoor.DOLocalMoveX(0.8f, 0.6f).SetEase(Ease.OutQuad);
+        LftDoor.DOLocalMoveX(0.8f, 0.6f).SetEase(Ease.OutQuad).OnComplete(()=>
+        {
+            floorNumber -= 1;
+            floorText.text = floorNumber.ToString();
+        });
     }
 }
