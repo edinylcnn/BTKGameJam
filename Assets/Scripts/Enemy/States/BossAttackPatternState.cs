@@ -17,12 +17,16 @@ namespace Enemy.States
             this.activeProjectiles = new List<BossProjectile>();
         }
 
+        private float stateTimer;
+        private float maxStateDuration = 10f; // Failsafe duration
+
         public override void Enter()
         {
             Debug.Log("Boss Enter Attack State (Invulnerable)");
             boss.SetInvulnerable(true);
             isSpawning = true;
             activeProjectiles.Clear();
+            stateTimer = 0f;
             
             SpawnProjectiles();
         }
@@ -65,6 +69,18 @@ namespace Enemy.States
 
         public override void Update()
         {
+            stateTimer += Time.deltaTime;
+
+            // Failsafe: If stuck in this state for too long, force exit
+            if (stateTimer > maxStateDuration)
+            {
+                Debug.LogWarning("Boss Attack State timed out! Forcing transition to Idle.");
+                activeProjectiles.ForEach(p => { if(p != null) Object.Destroy(p.gameObject); });
+                activeProjectiles.Clear();
+                stateMachine.ChangeState(boss.IdleState);
+                return;
+            }
+
             // Clean list
             for (int i = activeProjectiles.Count - 1; i >= 0; i--)
             {

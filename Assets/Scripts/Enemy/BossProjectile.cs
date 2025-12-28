@@ -48,13 +48,20 @@ namespace Enemy
         /// </summary>
         private void Launch()
         {
-            if (target == null) return;
+            if (target == null)
+            {
+                // Target lost/destroyed, destroy projectile immediately to avoid hanging
+                Destroy(gameObject);
+                return;
+            }
             
             isLaunched = true;
-            Vector3 direction = (target.position - transform.position).normalized;
             
-            // Move towards target over time (Fixed fast duration < 1s)
-            float travelTime = 0.5f;
+            // Calculate travel time based on speed and distance
+            float distance = Vector3.Distance(transform.position, target.position);
+            float travelTime = distance / MoveSpeed;
+
+            // Move towards target over time
             transform.DOMove(target.position, travelTime).SetEase(Ease.Linear).OnComplete(() =>
             {
                 // Logic when it hits the target (player)
