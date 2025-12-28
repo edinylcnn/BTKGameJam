@@ -58,8 +58,15 @@ namespace Managers
                 // 4. Find Boss in the new scene and wait for death (Clear Condition)
                 BossController boss = currentScene.GetComponentInChildren<BossController>();
 
+                if (boss == null)
+                {
+                    // Fallback: Try finding boss in the scene globally if not found in children
+                    boss = FindObjectOfType<BossController>();
+                }
+
                 if (boss != null)
                 {
+                    Debug.Log($"Boss found: {boss.name}. Waiting for death...");
                     bool bossDead = false;
                     System.Action onDeathHandler = () => bossDead = true;
                     boss.OnDeath += onDeathHandler;
@@ -68,11 +75,13 @@ namespace Managers
                     yield return new WaitUntil(() => bossDead);
 
                     boss.OnDeath -= onDeathHandler;
+                    Debug.Log("Boss died! Proceeding...");
                 }
                 else
                 {
-                    Debug.LogWarning("No BossController found in the instantiated scene! Passing level automatically.");
-                    yield return new WaitForSeconds(3f); // Fallback wait
+                    Debug.LogError("SERIOUS ERROR: No BossController found in the instantiated scene or globally!");
+                    // Infinite wait or very long wait to prevent game from continuing broken
+                    yield return new WaitForSeconds(9999f); 
                 }
 
                 // 5. Wait a bit after clear

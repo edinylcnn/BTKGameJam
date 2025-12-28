@@ -10,6 +10,7 @@ namespace Enemy
         public float MaxHealth = 100f;
         public float AttackInterval = 5f;
         public float VulnerableDuration = 3f;
+        public float InitialIdleDuration = 6f; // New initial idle duration
         public BossProjectile ProjectilePrefab; // Reference to the prefab
         public Transform PlayerTarget; // Reference to the player
 
@@ -19,6 +20,7 @@ namespace Enemy
 
         // States
         public BossIdleState IdleState { get; private set; }
+        public BossIdleState InitialIdleState { get; private set; } // Separate state for initial wait
         public BossAttackPatternState AttackState { get; private set; }
 
         private void Start()
@@ -27,10 +29,11 @@ namespace Enemy
             
             // Initialize States
             IdleState = new BossIdleState(this, VulnerableDuration);
+            InitialIdleState = new BossIdleState(this, InitialIdleDuration);
             AttackState = new BossAttackPatternState(this, AttackInterval);
 
-            // Start in Idle
-            ChangeState(IdleState);
+            // Start in Initial Idle
+            ChangeState(InitialIdleState);
         }
 
         public void TakeDamage(float amount)
