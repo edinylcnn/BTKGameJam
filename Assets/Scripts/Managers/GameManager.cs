@@ -49,9 +49,11 @@ namespace Managers
                 elevator.OpenDoor();
                 yield return new WaitForSeconds(doorAnimationDuration);
 
-                // 3. Move Player to Arena (Optional: User didn't strictly ask for this but it was in previous code)
+                // 3. Move Player to Arena
+                player.enabled = false;
                 player.transform.DOMove(arenaEntryPoint.position, playerMoveDuration).SetEase(Ease.Linear);
                 yield return new WaitForSeconds(playerMoveDuration);
+                player.enabled = true;
 
                 // 4. Find Boss in the new scene and wait for death (Clear Condition)
                 BossController boss = currentScene.GetComponentInChildren<BossController>();
@@ -77,8 +79,10 @@ namespace Managers
                 yield return new WaitForSeconds(waitAfterClear);
 
                 // 6. Return Player to Elevator
+                player.enabled = false;
                 player.transform.DOMove(elevatorStartPoint.position, playerMoveDuration).SetEase(Ease.Linear);
                 yield return new WaitForSeconds(playerMoveDuration);
+                // Note: Player stays disabled for the selection phase that follows immediately
 
                 // 7. Show Upgrade Cards and Wait for Selection
                 if (actionManager != null)
