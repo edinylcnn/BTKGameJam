@@ -21,7 +21,9 @@ public class actionManager : MonoBehaviour
     private RawImage rawImage3;
     List<int> upgrades = new List<int>() { 1, 2, 3, 4, 5 }; //1:health 2:attackdmg 3:defense 4:blockshield 5:pandorabox
     List<int> selected;
-    public Player player;
+    public YusufScripts.Player player;
+
+    public bool IsSelectionActive = false;
     public Texture[] textures;
     public Texture[] texturesHell;
 
@@ -38,7 +40,12 @@ public class actionManager : MonoBehaviour
 
     public void OnWallTriggered()
     {
+        IsSelectionActive = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         selected = upgrades.OrderBy(x => Random.value).Take(3).ToList();
+
         if (selected[0]==1)
         {
             firstUpgradeText.text = "Health + 5";
@@ -157,7 +164,7 @@ public class actionManager : MonoBehaviour
         }else if (selected[0]==5)
         {
             int rand = Random.Range(1, 4);//1:can 2:atackdmg 3:defense
-            int rand2 = Random.Range(1,6);//1,2,3,4: - deðer    5: + deðer
+            int rand2 = Random.Range(1,6);//1,2,3,4: - deï¿½er    5: + deï¿½er
             if(rand==1)
             {
                 if(rand2==5)
@@ -191,6 +198,9 @@ public class actionManager : MonoBehaviour
         firstUpgrade.gameObject.SetActive(false);
         secondUpgrade.gameObject.SetActive(false);
         thirdUpgrade.gameObject.SetActive(false);
+        IsSelectionActive = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Choosen2()
@@ -214,7 +224,7 @@ public class actionManager : MonoBehaviour
         else if (selected[1] == 5)
         {
             int rand = Random.Range(1, 4);//1:can 2:atackdmg 3:defense
-            int rand2 = Random.Range(1, 6);//1,2,3,4: - deðer    5: + deðer
+            int rand2 = Random.Range(1, 6);//1,2,3,4: - deï¿½er    5: + deï¿½er
             if (rand == 1)
             {
                 if (rand2 == 5)
@@ -253,6 +263,9 @@ public class actionManager : MonoBehaviour
         firstUpgrade.gameObject.SetActive(false);
         secondUpgrade.gameObject.SetActive(false);
         thirdUpgrade.gameObject.SetActive(false);
+        IsSelectionActive = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Choosen3()
@@ -276,7 +289,7 @@ public class actionManager : MonoBehaviour
         else if (selected[2] == 5)
         {
             int rand = Random.Range(1, 4);//1:can 2:atackdmg 3:defense
-            int rand2 = Random.Range(1, 6);//1,2,3,4: - deðer    5: + deðer
+            int rand2 = Random.Range(1, 6);//1,2,3,4: - deï¿½er    5: + deï¿½er
             if (rand == 1)
             {
                 if (rand2 == 5)
@@ -315,5 +328,8 @@ public class actionManager : MonoBehaviour
         firstUpgrade.gameObject.SetActive(false);
         secondUpgrade.gameObject.SetActive(false);
         thirdUpgrade.gameObject.SetActive(false);
+        IsSelectionActive = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
