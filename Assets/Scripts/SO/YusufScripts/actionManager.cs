@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-
+using UnityEditor;
 
 public class actionManager : MonoBehaviour
 {
@@ -13,17 +13,29 @@ public class actionManager : MonoBehaviour
     public Text firstUpgradeText;
     public Text secondUpgradeText;
     public Text thirdUpgradeText;
+    private Texture firstUpgradeTexture;
+    private Texture secondUpgradeTexture;
+    private Texture thirdUpgradeTexture;
+    private RawImage rawImage1;
+    private RawImage rawImage2;
+    private RawImage rawImage3;
     List<int> upgrades = new List<int>() { 1, 2, 3, 4, 5 }; //1:health 2:attackdmg 3:defense 4:blockshield 5:pandorabox
     List<int> selected;
     public YusufScripts.Player player;
 
     public bool IsSelectionActive = false;
+    public Texture[] textures;
+    public Texture[] texturesHell;
 
     void Start()
     {
         firstUpgrade.onClick.AddListener(Choosen1);
         secondUpgrade.onClick.AddListener(Choosen2);
         thirdUpgrade.onClick.AddListener(Choosen3);
+        rawImage1= firstUpgrade.GetComponent<RawImage>();
+        rawImage2 = secondUpgrade.GetComponent<RawImage>();
+        rawImage3 = thirdUpgrade.GetComponent<RawImage>();
+        
     }
 
     public void OnWallTriggered()
@@ -37,23 +49,31 @@ public class actionManager : MonoBehaviour
         if (selected[0]==1)
         {
             firstUpgradeText.text = "Health + 5";
-            //firstUpgrade.Image = can image'i;
+            
+            rawImage1.texture = textures[0];
         }else if(selected[0]==2)
         {
             firstUpgradeText.text = "Attack + 1";
-            //atackimage
-        }else if (selected[0]==3)
+            
+            rawImage1.texture = textures[1];
+        }
+        else if (selected[0]==3)
         {
             firstUpgradeText.text = "Defense + 0.1";
-            //defenseimage
-        }else if (selected[0]==4)
+            
+            rawImage1.texture = textures[2];
+        }
+        else if (selected[0]==4)
         {
             firstUpgradeText.text = "Block Shield";
-            //blockshieldimage
-        }else if (selected[0]==5)
+            
+            rawImage1.texture = textures[3];
+        }
+        else if (selected[0]==5)
         {
             firstUpgradeText.text = "Pandora Box";
-            //pandoraboximage
+            
+            rawImage1.texture = textures[4];
         }
 
 
@@ -61,27 +81,32 @@ public class actionManager : MonoBehaviour
         if (selected[1] == 1)
         {
             secondUpgradeText.text = "Health + 5";
-            //firstUpgrade.Image = can image'i;
+            
+            rawImage2.texture = textures[0];
         }
         else if (selected[1] == 2)
         {
             secondUpgradeText.text = "Attack + 1";
-            //atackimage
+            
+            rawImage2.texture = textures[1];
         }
         else if (selected[1] == 3)
         {
             secondUpgradeText.text = "Defense + 0.1";
-            //defenseimage
+            
+            rawImage2.texture = textures[2];
         }
         else if (selected[1] == 4)
         {
             secondUpgradeText.text = "Block Shield";
-            //blockshieldimage
+            
+            rawImage2.texture = textures[3];
         }
         else if (selected[1] == 5)
         {
             secondUpgradeText.text = "Pandora Box";
-            //pandora box image
+            
+            rawImage2.texture = textures[4];
         }
 
 
@@ -89,27 +114,32 @@ public class actionManager : MonoBehaviour
         if (selected[2] == 1)
         {
             thirdUpgradeText.text = "Health + 5";
-            //firstUpgrade.Image = can image'i;
+            
+            rawImage3.texture = textures[0];
         }
         else if (selected[2] == 2)
         {
             thirdUpgradeText.text = "Attack + 1";
-            //atackimage
+            
+            rawImage3.texture = textures[1];
         }
         else if (selected[2] == 3)
         {
             thirdUpgradeText.text = "Defense + 0.1";
-            //defenseimage
+            
+            rawImage3.texture = textures[2];
         }
         else if (selected[2] == 4)
         {
             thirdUpgradeText.text = "Block Shield";
-            //blockshieldimage
+            
+            rawImage3.texture = textures[3];
         }
         else if (selected[2] == 5)
         {
             thirdUpgradeText.text = "Pandora Box";
-            //pandora box image
+            
+            rawImage3.texture = textures[4];
         }
 
         firstUpgrade.gameObject.SetActive(true);
