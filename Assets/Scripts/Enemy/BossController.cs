@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Patterns;
+using DamageNumbersPro;
 using Enemy.States;
 
 namespace Enemy
@@ -12,6 +14,8 @@ namespace Enemy
         public float VulnerableDuration = 3f;
         public float InitialIdleDuration = 6f; // New initial idle duration
         public BossProjectile ProjectilePrefab; // Reference to the prefab
+        public DamageNumber damageNumberPrefab; // Reference to the DamageNumberPro prefab
+        public Image healthBarImage; // Reference to the Health Bar Image
         public Transform PlayerTarget; // Reference to the player
 
         [Header("Debug")]
@@ -25,6 +29,12 @@ namespace Enemy
 
         private void Start()
         {
+            if (PlayerTarget == null)
+            {
+                var player = FindObjectOfType<PlayerController>();
+                if (player != null) PlayerTarget = player.transform;
+            }
+
             currentHealth = MaxHealth;
             
             // Initialize States
@@ -40,11 +50,32 @@ namespace Enemy
         {
             if (isInvulnerable)
             {
+                if (damageNumberPrefab != null)
+                {
+                    DamageNumber dn = damageNumberPrefab.Spawn(transform.position + Vector3.up * 2f, "Miss");
+                    dn.enableNumber = false;
+                }
                 Debug.Log("Boss is Invulnerable! Attack blocked.");
                 return;
             }
 
             currentHealth -= amount;
+
+            if (healthBarImage != null)
+            {
+                healthBarImage.fillAmount = currentHealth / MaxHealth;
+                // Debug.Log($"Health Bar updated. Fill Amount: {healthBarImage.fillAmount}");
+            }
+            else
+            {
+                Debug.LogWarning("Health Bar Image is not assigned in BossController!");
+            }
+
+            if (damageNumberPrefab != null)
+            {
+                damageNumberPrefab.Spawn(transform.position + Vector3.up * 2f, amount);
+            }
+
             Debug.Log($"Boss took {amount} damage. Current Health: {currentHealth}");
 
             if (currentHealth <= 0)

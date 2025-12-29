@@ -1,4 +1,5 @@
 using UnityEngine;
+using YusufScripts;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(InputHandler))]
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private float IkPitch = 1.79f;
     private float gunPitch = 0f;
     private float nextFireTime;
+    private YusufScripts.Player playerStats;
 
     private void Awake()
     {
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
         inputHandler = GetComponent<InputHandler>();
         animatorHandler = GetComponent<AnimatorHandler>();
         armIKController = GetComponent<ArmIKController>();
+        playerStats = GetComponent<YusufScripts.Player>();
 
         if (cameraTransform == null && Camera.main != null)
         {
@@ -175,6 +178,22 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        throw new System.NotImplementedException();
+        if (playerStats == null) return;
+
+        float reducedDamage = Mathf.Max(0, damage - playerStats.defense);
+        playerStats.health -= reducedDamage;
+
+        Debug.Log($"Player hit! Damage: {damage}, Reduced: {reducedDamage}, Remaining HP: {playerStats.health}");
+
+        if (playerStats.health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log("Player Died");
+        // Add death logic here (e.g., disable input, show game over screen)
     }
 }

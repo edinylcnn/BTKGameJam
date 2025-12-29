@@ -23,7 +23,7 @@ public class GameMenu : MonoBehaviour
 
     public void ExitGame()
     {
-        Debug.Log("Oyun kapatýlýyor...");
+        Debug.Log("Oyun kapanÄ±yor...");
         Application.Quit();
     }
 }

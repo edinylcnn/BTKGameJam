@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using DamageNumbersPro;
 
 namespace Enemy
 {
@@ -12,6 +13,7 @@ namespace Enemy
         public float SpawnDuration = 0.5f;
         public float Health = 30f; // New Health variable
         public float SpawnJumpPower = 2f; // Power of the jump
+        public DamageNumber damageNumberPrefab; // DamageNumberPro prefab
 
         private Transform target;
         private bool isLaunched;
@@ -92,6 +94,11 @@ namespace Enemy
         private void TakeDamage(float amount)
         {
             currentHealth -= amount;
+            
+            if (damageNumberPrefab != null)
+            {
+                damageNumberPrefab.Spawn(transform.position + Vector3.up * 1f, amount);
+            }
             
             // Optional: Shake effect on damage
             transform.DOShakeScale(0.1f, 0.2f);

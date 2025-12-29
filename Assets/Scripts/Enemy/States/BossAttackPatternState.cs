@@ -52,9 +52,9 @@ namespace Enemy.States
                     if (boss == null) return;
                     
                     // Calculate offset positions
-                    Vector3 offset = new Vector3((index - 1) * 2f, 2f, 0f); 
+                    Vector3 offset = new Vector3((index - 1) * 2f, 2f, -1f); 
                     // Simple offset relative to world
-                    Vector3 spawnPos = boss.transform.position + boss.transform.forward * 2f + offset;
+                    Vector3 spawnPos = boss.transform.position + boss.transform.forward * 1f + offset;
 
                     // Instantiate
                     BossProjectile proj = Object.Instantiate(boss.ProjectilePrefab, spawnPos, Quaternion.identity);
